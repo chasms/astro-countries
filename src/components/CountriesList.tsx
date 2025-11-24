@@ -47,10 +47,16 @@ const CountriesList = () => {
   }, []);
 
   const bookmarkedCountries = useMemo(() => countries.filter((country) => !!countryBookmarks[country.flag]), [countries, countryBookmarks]);
+
+  const sortedCountries = useMemo(
+    () => countries.toSorted((countryA, countryB) => ("" + countryA.name.official).localeCompare(countryB.name.official)),
+    [countries]
+  );
+
   return (
     <>
       <div className="grid grid-cols-2 gap-4 p-4">
-        {countries?.map((country) => (
+        {sortedCountries?.map((country) => (
           <CountryCard
             key={country.name.official}
             country={country}
