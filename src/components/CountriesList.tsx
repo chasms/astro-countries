@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { Country } from "../types";
 import CountryCard from "./CountryCard";
 
+const localStorageCountryBookmarksKey = "CountryBookmarks";
+
 const CountriesList = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [countryBookmarks, setCountryBookmarks] = useState<Record<Country["flag"], boolean>>({});
@@ -10,6 +12,8 @@ const CountriesList = () => {
     const currentlyBookmarked = countryBookmarks[countryFlag];
 
     const newBookmarks = { ...countryBookmarks, [countryFlag]: !currentlyBookmarked };
+
+    localStorage.setItem(localStorageCountryBookmarksKey, JSON.stringify(newBookmarks));
 
     setCountryBookmarks(newBookmarks);
   };
@@ -22,7 +26,20 @@ const CountriesList = () => {
     } catch (error) {}
   }
 
+  function getCountryBookmarks() {
+    try {
+      const response = localStorage.getItem(localStorageCountryBookmarksKey);
+
+      if (!response) return;
+
+      const countryBookmarks = JSON.parse(response);
+
+      setCountryBookmarks(countryBookmarks);
+    } catch (error) {}
+  }
+
   useEffect(() => {
+    getCountryBookmarks();
     getAndSetCountries();
   }, []);
 
