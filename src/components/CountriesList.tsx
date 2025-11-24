@@ -46,12 +46,12 @@ const CountriesList = () => {
     getAndSetCountries();
   }, []);
 
-  const bookmarkedCountries = useMemo(() => countries.filter((country) => !!countryBookmarks[country.flag]), [countries, countryBookmarks]);
-
   const sortedCountries = useMemo(
     () => countries.toSorted((countryA, countryB) => ("" + countryA.name.official).localeCompare(countryB.name.official)),
     [countries]
   );
+
+  const bookmarkedCountries = useMemo(() => sortedCountries.filter((country) => !!countryBookmarks[country.flag]), [sortedCountries, countryBookmarks]);
 
   return (
     <>
