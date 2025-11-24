@@ -8,9 +8,9 @@ interface Props {
 
 const CountryComparison = ({ countries, setCountryBookmark }: Props) => {
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
+    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-4 p-4">
       {countries.map((country) => (
-        <CountryCard country={country} isBookmarked={true} setCountryBookmark={() => setCountryBookmark(country.flag)} />
+        <CountryCard vertical country={country} isBookmarked={true} setCountryBookmark={() => setCountryBookmark(country.flag)} />
       ))}
     </div>
   );

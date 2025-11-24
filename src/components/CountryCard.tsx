@@ -5,11 +5,16 @@ interface Props {
   country: Country;
   setCountryBookmark: () => void;
   isBookmarked: boolean;
+  vertical?: boolean;
 }
 
-const CountryCard = ({ country, isBookmarked, setCountryBookmark }: Props) => {
+const CountryCard = ({ country, isBookmarked, setCountryBookmark, vertical = false }: Props) => {
   return (
-    <div className="w-full mx-auto flex flex-1 justify-between items-center gap-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+    <div
+      className={`w-full mx-auto flex flex-1 justify-between items-center gap-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10 ${
+        vertical ? "flex-col" : ""
+      }`}
+    >
       <div className="flex flex-wrap items-center flex-1 gap-x-4">
         <h1 className="text-7xl">{country.flag}</h1>
         <h5 className="text-sm font-medium text-black dark:text-white">{country.name.official}</h5>
