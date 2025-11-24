@@ -59,19 +59,12 @@ const CountriesList = () => {
           />
         ))}
       </div>
-      {isDrawerOpen || (
-        <div
-          className="border-r-4 border-b-4 border-blue-900 w-6 h-6 fixed right-1/2 bottom-12 rotate-225 translate-x-3 hover:border-blue-400 hover:w-7 hover:h-7 hover:translate-x-3.5 cursor-pointer transition-all duration-100 ease-in-out"
-          onClick={() => setIsDrawerOpen(true)}
-        />
-      )}
+      <CloseButton isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
       <div
         id="drawer"
         aria-labelledby="drawer-title"
         className={`fixed bottom-0 w-full bg-slate-800 shadow-lg outline outline-black/5 transition-all duration-300 ease-in-out ${isDrawerOpen ? "h-1/3 overflow-auto" : "h-12 overflow-hidden"}`}
       >
-        {isDrawerOpen && <CloseButton onClick={() => setIsDrawerOpen(false)} />}
-
         <CountryComparison countries={bookmarkedCountries} setCountryBookmark={setCountryBookmark} />
       </div>
     </>
