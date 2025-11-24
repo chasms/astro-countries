@@ -4,6 +4,15 @@ import CountryCard from "./CountryCard";
 
 const CountriesList = () => {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [countryBookmarks, setCountryBookmarks] = useState<Record<Country["flag"], boolean>>({});
+
+  const setCountryBookmark = (countryFlag: Country["flag"]) => {
+    const currentlyBookmarked = countryBookmarks[countryFlag];
+
+    const newBookmarks = { ...countryBookmarks, [countryFlag]: !currentlyBookmarked };
+
+    setCountryBookmarks(newBookmarks);
+  };
 
   async function getAndSetCountries() {
     try {
@@ -20,7 +29,12 @@ const CountriesList = () => {
   return (
     <div>
       {countries?.map((country) => (
-        <CountryCard key={country.name.official} country={country} />
+        <CountryCard
+          key={country.name.official}
+          country={country}
+          setCountryBookmark={() => setCountryBookmark(country.flag)}
+          isBookmarked={!!countryBookmarks[country.flag]}
+        />
       ))}
     </div>
   );
