@@ -11,7 +11,7 @@ interface Props {
 const CountryCard = ({ country, isBookmarked, setCountryBookmark, vertical = false }: Props) => {
   return (
     <div
-      className={`w-full mx-auto flex flex-1 justify-between items-center gap-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10 ${
+      className={`w-full mx-auto flex flex-1 justify-between items-center gap-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 ${
         vertical ? "flex-col" : ""
       }`}
     >
